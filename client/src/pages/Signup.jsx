@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext.jsx";
 import { validateSignup, passwordRules } from "../utils/validation.js";
 import PasswordInput from "../components/Shared/PasswordInput.jsx";
+import usePageTitle from "../utils/usePageTitle.js";
 
 const Signup = () => {
+  usePageTitle("Sign up");
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
@@ -38,7 +40,7 @@ const Signup = () => {
     }
   };
 
-  // ── Password strength ──────────────────
+  // ââ Password strength ââââââââââââââââââ
   const passedRules = form.password ? passwordRules.filter((r) => r.test(form.password)) : [];
   const strength = passedRules.length; // 0-3
 
@@ -48,7 +50,7 @@ const Signup = () => {
 
       <div className="relative w-full max-w-md animate-fade-in">
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
-          {/* ── Header ──────────────────── */}
+          {/* ââ Header ââââââââââââââââââââ */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-600/10 border border-primary-600/30 mb-4">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
@@ -59,17 +61,17 @@ const Signup = () => {
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-white">Create account</h1>
-            <p className="text-slate-500 text-sm mt-1">Join TaskFlow — manage your tasks effortlessly</p>
+            <p className="text-slate-500 text-sm mt-1">Join TaskFlow â manage your tasks effortlessly</p>
           </div>
 
-          {/* ── Server error banner ────────── */}
+          {/* ââ Server error banner ââââââââââ */}
           {serverError && (
             <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3 mb-5 flex items-center gap-2">
-              <span>⚠</span> {serverError}
+              <span>â </span> {serverError}
             </div>
           )}
 
-          {/* ── Form ─────────────────────── */}
+          {/* ââ Form âââââââââââââââââââââââ */}
           <form onSubmit={handleSubmit} noValidate className="space-y-4">
             {/* Name */}
             <div>
@@ -95,7 +97,7 @@ const Signup = () => {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                placeholder="••••••••"
+                placeholder="â¢â¢â¢â¢â¢â¢â¢â¢"
                 autoComplete="new-password"
                 hasError={!!errors.password}
               />
@@ -112,7 +114,7 @@ const Signup = () => {
                   <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
                     {passwordRules.map((r, i) => (
                       <span key={i} className={`text-xs flex items-center gap-1 ${r.test(form.password) ? "text-emerald-400" : "text-slate-500"}`}>
-                        <span>{r.test(form.password) ? "✓" : "○"}</span> {r.label}
+                        <span>{r.test(form.password) ? "â" : "â"}</span> {r.label}
                       </span>
                     ))}
                   </div>
@@ -128,7 +130,7 @@ const Signup = () => {
                 name="confirmPassword"
                 value={form.confirmPassword}
                 onChange={handleChange}
-                placeholder="••••••••"
+                placeholder="â¢â¢â¢â¢â¢â¢â¢â¢"
                 autoComplete="new-password"
                 hasError={!!errors.confirmPassword}
               />
@@ -139,14 +141,14 @@ const Signup = () => {
             <button type="submit" disabled={loading}
               className="w-full bg-primary-600 hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-2">
               {loading ? (
-                <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Creating account…</>
+                <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Creating accountâ¦</>
               ) : (
                 "Create Account"
               )}
             </button>
           </form>
 
-          {/* ── Footer ──────────────────── */}
+          {/* ââ Footer ââââââââââââââââââââ */}
           <p className="text-center text-sm text-slate-500 mt-6">
             Already have an account?{" "}
             <Link to="/login" className="text-primary-400 hover:text-primary-300 font-medium transition-colors">Sign in</Link>

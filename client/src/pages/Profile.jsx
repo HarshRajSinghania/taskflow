@@ -3,8 +3,10 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { useToast } from "../components/Shared/Toast.jsx";
 import api from "../utils/api.js";
 import { validatePassword } from "../utils/validation.js";
+import usePageTitle from "../utils/usePageTitle.js";
 
 const Profile = () => {
+  usePageTitle("Profile");
   const { user, updateLocalUser } = useAuth();
   const { addToast } = useToast();
 
@@ -28,7 +30,7 @@ const Profile = () => {
     setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
   };
 
-  // ── Save profile ─────────────────────
+  // ââ Save profile âââââââââââââââââââââ
   const handleProfileSave = async (e) => {
     e.preventDefault();
     if (!form.name || form.name.trim().length < 2) {
@@ -47,7 +49,7 @@ const Profile = () => {
     }
   };
 
-  // ── Change password ──────────────────
+  // ââ Change password ââââââââââââââââââ
   const handlePasswordSave = async (e) => {
     e.preventDefault();
     if (!pwForm.currentPassword) { setErrors({ currentPassword: "Current password is required." }); return; }
@@ -83,16 +85,16 @@ const Profile = () => {
       <h1 className="text-xl font-bold text-white mb-6">Profile</h1>
 
       <div className="max-w-xl space-y-6">
-        {/* ── Avatar + Name Header ────── */}
+        {/* ââ Avatar + Name Header ââââââ */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 flex items-center gap-5">
           <img src={avatarUrl} alt="avatar" className="w-16 h-16 rounded-full object-cover border-2 border-slate-700" />
           <div>
-            <p className="text-lg font-semibold text-white">{form.name || "—"}</p>
+            <p className="text-lg font-semibold text-white">{form.name || "â"}</p>
             <p className="text-sm text-slate-500">{user?.email}</p>
           </div>
         </div>
 
-        {/* ── Edit Profile ──────────── */}
+        {/* ââ Edit Profile ââââââââââââ */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
           <h2 className="text-sm font-semibold text-white mb-4 uppercase tracking-wide">Edit Profile</h2>
           <form onSubmit={handleProfileSave} noValidate className="space-y-4">
@@ -115,7 +117,7 @@ const Profile = () => {
                 value={form.bio}
                 onChange={handleChange}
                 rows={3}
-                placeholder="Tell us about yourself…"
+                placeholder="Tell us about yourselfâ¦"
                 className="w-full px-3 py-2 text-sm rounded-lg resize-none"
               />
             </div>
@@ -126,18 +128,18 @@ const Profile = () => {
                 name="avatar"
                 value={form.avatar}
                 onChange={handleChange}
-                placeholder="https://…"
+                placeholder="https://â¦"
                 className="w-full px-3 py-2 text-sm rounded-lg"
               />
               <p className="text-xs text-slate-600 mt-1">Leave blank to use auto-generated avatar.</p>
             </div>
             <button type="submit" disabled={loading} className="w-full bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white font-semibold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
-              {loading ? <><div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving…</> : "Save Profile"}
+              {loading ? <><div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Savingâ¦</> : "Save Profile"}
             </button>
           </form>
         </div>
 
-        {/* ── Change Password ────────── */}
+        {/* ââ Change Password ââââââââââ */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
           <h2 className="text-sm font-semibold text-white mb-4 uppercase tracking-wide">Change Password</h2>
           <form onSubmit={handlePasswordSave} noValidate className="space-y-4">
@@ -149,7 +151,7 @@ const Profile = () => {
                 name="currentPassword"
                 value={pwForm.currentPassword}
                 onChange={handlePwChange}
-                placeholder="••••••••"
+                placeholder="â¢â¢â¢â¢â¢â¢â¢â¢"
                 className={`w-full px-3 py-2 text-sm rounded-lg ${errors.currentPassword ? "border-red-500 ring-1 ring-red-500" : ""}`}
               />
               {errors.currentPassword && <p className="text-red-400 text-xs mt-1">{errors.currentPassword}</p>}
@@ -162,7 +164,7 @@ const Profile = () => {
                 name="newPassword"
                 value={pwForm.newPassword}
                 onChange={handlePwChange}
-                placeholder="••••••••"
+                placeholder="â¢â¢â¢â¢â¢â¢â¢â¢"
                 className={`w-full px-3 py-2 text-sm rounded-lg ${errors.newPassword ? "border-red-500 ring-1 ring-red-500" : ""}`}
               />
               {errors.newPassword && <p className="text-red-400 text-xs mt-1">{errors.newPassword}</p>}
@@ -175,13 +177,13 @@ const Profile = () => {
                 name="confirmNew"
                 value={pwForm.confirmNew}
                 onChange={handlePwChange}
-                placeholder="••••••••"
+                placeholder="â¢â¢â¢â¢â¢â¢â¢â¢"
                 className={`w-full px-3 py-2 text-sm rounded-lg ${errors.confirmNew ? "border-red-500 ring-1 ring-red-500" : ""}`}
               />
               {errors.confirmNew && <p className="text-red-400 text-xs mt-1">{errors.confirmNew}</p>}
             </div>
             <button type="submit" disabled={pwLoading} className="w-full bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-white font-semibold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
-              {pwLoading ? <><div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving…</> : "Update Password"}
+              {pwLoading ? <><div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Savingâ¦</> : "Update Password"}
             </button>
           </form>
         </div>

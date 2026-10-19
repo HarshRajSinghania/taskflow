@@ -3,8 +3,10 @@ import { Link, useNavigate, useLocation } from "react-router";
 import { useAuth } from "../context/AuthContext.jsx";
 import { validateLogin } from "../utils/validation.js";
 import PasswordInput from "../components/Shared/PasswordInput.jsx";
+import usePageTitle from "../utils/usePageTitle.js";
 
 const Login = () => {
+  usePageTitle("Log in");
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
@@ -43,13 +45,13 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      {/* ── Subtle grid background ─────────── */}
+      {/* ââ Subtle grid background âââââââââââ */}
       <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
 
       <div className="relative w-full max-w-md animate-fade-in">
-        {/* ── Card ────────────────────────── */}
+        {/* ââ Card ââââââââââââââââââââââââââ */}
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
-          {/* ── Header ──────────────────── */}
+          {/* ââ Header ââââââââââââââââââââ */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-600/10 border border-primary-600/30 mb-4">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
@@ -61,14 +63,14 @@ const Login = () => {
             <p className="text-slate-500 text-sm mt-1">Sign in to your TaskFlow account</p>
           </div>
 
-          {/* ── Server error banner ────────── */}
+          {/* ââ Server error banner ââââââââââ */}
           {serverError && (
             <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3 mb-5 flex items-center gap-2">
-              <span>⚠</span> {serverError}
+              <span>â </span> {serverError}
             </div>
           )}
 
-          {/* ── Form ─────────────────────── */}
+          {/* ââ Form âââââââââââââââââââââââ */}
           <form onSubmit={handleSubmit} noValidate className="space-y-5">
             {/* Email */}
             <div>
@@ -93,7 +95,7 @@ const Login = () => {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                placeholder="••••••••"
+                placeholder="â¢â¢â¢â¢â¢â¢â¢â¢"
                 hasError={!!errors.password}
               />
               {errors.password && <p className="text-red-400 text-xs mt-1.5">{errors.password}</p>}
@@ -106,14 +108,14 @@ const Login = () => {
               className="w-full bg-primary-600 hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               {loading ? (
-                <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Signing in…</>
+                <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Signing inâ¦</>
               ) : (
                 "Sign In"
               )}
             </button>
           </form>
 
-          {/* ── Footer link ──────────────── */}
+          {/* ââ Footer link ââââââââââââââââ */}
           <p className="text-center text-sm text-slate-500 mt-6">
             Don't have an account?{" "}
             <Link to="/signup" className="text-primary-400 hover:text-primary-300 font-medium transition-colors">

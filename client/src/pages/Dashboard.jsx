@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "react-router";
 import api from "../utils/api.js";
 import Spinner from "../components/Shared/Spinner.jsx";
+import usePageTitle from "../utils/usePageTitle.js";
 
 const StatCard = ({ title, value, icon, color, sub }) => (
   <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 animate-slide-up">
@@ -29,6 +30,7 @@ const getGreeting = (hour) => {
 };
 
 const Dashboard = () => {
+  usePageTitle("Dashboard");
   const { user } = useAuth();
   const greeting = getGreeting(new Date().getHours());
   const [stats, setStats] = useState({ total: 0, todo: 0, inProgress: 0, done: 0 });
@@ -63,15 +65,15 @@ const Dashboard = () => {
 
   return (
     <div className="flex-1 p-6 overflow-y-auto">
-      {/* ── Greeting ─────────────────────── */}
+      {/* ââ Greeting âââââââââââââââââââââââ */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white">
-          {greeting}, <span className="text-primary-400">{user?.name?.split(" ")[0]}</span> 👋
+          {greeting}, <span className="text-primary-400">{user?.name?.split(" ")[0]}</span> ð
         </h1>
         <p className="text-slate-500 text-sm mt-1">Here's what's going on with your tasks.</p>
       </div>
 
-      {/* ── Stat Cards ───────────────────── */}
+      {/* ââ Stat Cards âââââââââââââââââââââ */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard title="Total Tasks" value={stats.total} color="bg-primary-600/15" sub="All tasks" icon={
           <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
@@ -87,14 +89,14 @@ const Dashboard = () => {
         } />
       </div>
 
-      {/* ── Recent Tasks ─────────────────── */}
+      {/* ââ Recent Tasks âââââââââââââââââââ */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base font-semibold text-white">Recent Tasks</h2>
-          <Link to="/tasks" className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">View all →</Link>
+          <Link to="/tasks" className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">View all â</Link>
         </div>
         {recentTasks.length === 0 ? (
-          <p className="text-slate-500 text-sm text-center py-8">No tasks yet. <Link to="/tasks" className="text-primary-400 hover:underline">Create one →</Link></p>
+          <p className="text-slate-500 text-sm text-center py-8">No tasks yet. <Link to="/tasks" className="text-primary-400 hover:underline">Create one â</Link></p>
         ) : (
           <div className="flex flex-col gap-2">
             {recentTasks.map((task) => (
